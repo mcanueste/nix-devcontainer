@@ -6,10 +6,15 @@
 
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
 
-    nix-alien.url = "github:thiagokokada/nix-alien";
-
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-alien.url = "github:thiagokokada/nix-alien";
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
