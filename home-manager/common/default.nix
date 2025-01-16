@@ -94,14 +94,6 @@
       registry.nixpkgs.flake = inputs.nixpkgs;
     };
 
-    # if standalone install, setup nixgl
-    nixGL = {
-      packages = inputs.nixgl.packages;
-      defaultWrapper = "mesa";
-      offloadWrapper = "nvidiaPrime";
-      installScripts = ["mesa" "nvidiaPrime"];
-    };
-
     # Enable settings to make it work better on standalone hm installations
     targets.genericLinux.enable = true;
 
@@ -114,7 +106,7 @@
       pkgs.nix-output-monitor
       pkgs.manix
 
-      # Install home-manager and nixgl
+      # Install home-manager CLI
       pkgs.home-manager
     ];
   };
