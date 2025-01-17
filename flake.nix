@@ -49,6 +49,14 @@
     overlays = import ./overlays {inherit inputs;};
 
     homeConfigurations = {
+      "base@devcontainer" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = args;
+        modules = [
+          ./home-manager/base.nix
+        ];
+      };
+
       "code@devcontainer" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = args;
