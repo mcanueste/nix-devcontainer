@@ -18,7 +18,7 @@
   # Change versions, add patches, set compilation flags, etc.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    # Had to add a patch to fix a bug in Nix CLI for "too many open files" error
+    # Example:
     # nix.package = pkgs.nixVersions.latest.overrideAttrs (drv: {
     #   patches =
     #     (drv.patches or [])

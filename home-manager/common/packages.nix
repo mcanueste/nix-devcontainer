@@ -26,8 +26,6 @@
       pkgs.traceroute
       pkgs.hyperfine
       pkgs.entr
-      pkgs.ffmpegthumbnailer
-      pkgs.just
       pkgs.bottom
 
       (pkgs.libExt.mkIfElseNull config.nixconf.packages.aws pkgs.awscli2)

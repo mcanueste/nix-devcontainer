@@ -72,7 +72,7 @@
         warn-dirty = false;
 
         # Optimize store after each build
-        auto-optimise-store = false;
+        auto-optimise-store = true;
 
         # Avoid unwanted garbage collection when using nix-direnv
         keep-outputs = true;
@@ -87,7 +87,7 @@
     };
 
     # Enable settings to make it work better on standalone hm installations
-    targets.genericLinux.enable = true;
+    # targets.genericLinux.enable = true;
 
     # Set flakes path for nh
     home.sessionVariables.FLAKE = config.nixconf.flakePath;

@@ -14,17 +14,6 @@ in {
 
   config = {
     programs = {
-      bat = {
-        enable = true;
-        extraPackages = with pkgs.bat-extras; [
-          batgrep
-          batman
-          prettybat
-        ];
-      };
-
-      dircolors = enable;
-
       direnv = builtins.removeAttrs enable ["enableFishIntegration"]; # fish integration enabled by default
 
       eza =
@@ -37,7 +26,6 @@ in {
       fzf =
         enable
         // {
-          tmux.enableShellIntegration = true;
           defaultCommand = "${pkgs.fd}/bin/fd --type f";
           fileWidgetCommand = "${pkgs.fd}/bin/fd --type f";
           fileWidgetOptions = [
