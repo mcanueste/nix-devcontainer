@@ -8,6 +8,6 @@
   ];
 
   options.nixconf.scripts = {
-    enable = lib.mkOption "Custom Scripts";
+    enable = lib.mkEnableOption "Custom Scripts";
   };
 }

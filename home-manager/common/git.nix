@@ -5,7 +5,7 @@
   ...
 }: {
   options.nixconf.git = {
-    enable = lib.mkOption "git";
+    enable = lib.mkEnableOption "git";
 
     gitUsername = lib.mkOption {
       type = lib.types.str;

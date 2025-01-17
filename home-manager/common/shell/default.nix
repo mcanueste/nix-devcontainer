@@ -16,7 +16,7 @@ in {
   options.nixconf.shell = {
     starship = pkgs.libExt.mkEnabledOption "Starship";
 
-    fish = lib.mkOption "Fish";
+    fish = lib.mkEnableOption "Fish";
   };
 
   config = {

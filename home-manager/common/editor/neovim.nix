@@ -9,7 +9,7 @@
     ./neovim
   ];
 
-  options.nixconf.editor.neovim = lib.mkOption "neovim";
+  options.nixconf.editor.neovim = lib.mkEnableOption "neovim";
 
   config = lib.mkIf config.nixconf.editor.neovim {
     programs = let
