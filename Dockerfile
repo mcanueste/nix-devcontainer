@@ -8,23 +8,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN echo "dash dash/sh boolean false" | debconf-set-selections
 RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 
-# psmisc \
-# procps \
-# less \
-# xz-utils \
-# nano \
-# git \
-# ssh \
-# direnv \
-# gnupg2 \
-# iproute2 \
-# inetutils-ping \
-# rsync \
-# lsb-release \
-# dialog \
-# man-db \
-# bash-completion \
-# acl \
 RUN apt-get update -y \
     && apt-get -y install --no-install-recommends \
       sudo \
@@ -54,5 +37,22 @@ ENV PATH="${PATH}:/nix/var/nix/profiles/default/bin"
 
 USER code
 
-RUN nix run nixpkgs#home-manager -- switch --flake github:mcanueste/nix-devcontainer#base@devcontainer
+RUN USER=${USERNAME} nix run nixpkgs#home-manager -- switch --flake github:mcanueste/nix-devcontainer#base@devcontainer
 
+# psmisc \
+# procps \
+# less \
+# xz-utils \
+# nano \
+# git \
+# ssh \
+# direnv \
+# gnupg2 \
+# iproute2 \
+# inetutils-ping \
+# rsync \
+# lsb-release \
+# dialog \
+# man-db \
+# bash-completion \
+# acl \
