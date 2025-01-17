@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   enable = {
     enable = true;
     enableBashIntegration = true;
@@ -12,7 +16,7 @@ in {
   options.nixconf.shell = {
     starship = pkgs.libExt.mkEnabledOption "Starship";
 
-    fish = pkgs.libExt.mkEnabledOption "Fish";
+    fish = lib.mkOption "Fish";
   };
 
   config = {

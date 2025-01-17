@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   inputs,
@@ -10,7 +9,7 @@
     ./neovim
   ];
 
-  options.nixconf.editor.neovim = pkgs.libExt.mkEnabledOption "neovim";
+  options.nixconf.editor.neovim = lib.mkOption "neovim";
 
   config = lib.mkIf config.nixconf.editor.neovim {
     programs = let

@@ -55,11 +55,8 @@
       homeDirectory = "/home/${config.nixconf.username}";
     };
 
-    # Set state version, not really important as we are using flakes,
+    # Set state version, not really important as we are using flakes
     home.stateVersion = config.nixconf.stateVersion;
-
-    # Nicely reload system units when changing configs
-    systemd.user.startServices = "sd-switch";
 
     nix = {
       # Nix CLI version
@@ -104,7 +101,6 @@
       pkgs.nh
       pkgs.nvd
       pkgs.nix-output-monitor
-      pkgs.manix
 
       # Install home-manager CLI
       pkgs.home-manager

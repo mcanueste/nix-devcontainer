@@ -5,17 +5,17 @@
   ...
 }: {
   options.nixconf.git = {
-    enable = pkgs.libExt.mkEnabledOption "git";
+    enable = lib.mkOption "git";
 
     gitUsername = lib.mkOption {
       type = lib.types.str;
-      default = "mcanueste";
+      default = "devcontainer";
       description = "Git username";
     };
 
     gitEmail = lib.mkOption {
       type = lib.types.str;
-      default = "mcanueste@gmail.com";
+      default = "devcontainer@email.com";
       description = "Git email";
     };
   };
