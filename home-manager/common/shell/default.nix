@@ -1,12 +1,7 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
+{pkgs, ...}: let
   enable = {
     enable = true;
     enableBashIntegration = true;
-    enableFishIntegration = true;
   };
 in {
   imports = [
@@ -15,19 +10,17 @@ in {
 
   options.nixconf.shell = {
     starship = pkgs.libExt.mkEnabledOption "Starship";
-
-    fish = lib.mkEnableOption "Fish";
   };
 
   config = {
     programs = {
       bat = {
         enable = true;
-        # extraPackages = with pkgs.bat-extras; [
-        #   # batgrep
-        #   # batman
-        #   prettybat
-        # ];
+        extraPackages = with pkgs.bat-extras; [
+          batgrep
+          batman
+          prettybat
+        ];
       };
 
       dircolors = enable;
@@ -75,20 +68,8 @@ in {
           };
         };
 
-      fish = {
-        enable = true;
-        shellInit = ''
-          set fish_greeting # Disable greeting
-          fish_vi_key_bindings
-        '';
-      };
-
       # fish wants to generate man cache for every lang for no reason...
       man.generateCaches = false;
     };
-
-    home.packages = [
-      pkgs.aider-chat
-    ];
   };
 }

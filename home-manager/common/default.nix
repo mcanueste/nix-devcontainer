@@ -7,13 +7,8 @@
   ...
 }: {
   imports = [
-    ./editor
-    ./scripts
     ./shell
-
-    ./git.nix
     ./packages.nix
-    ./theme.nix
   ];
 
   options.nixconf = {

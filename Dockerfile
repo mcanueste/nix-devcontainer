@@ -37,7 +37,7 @@ ENV PATH="${PATH}:/nix/var/nix/profiles/default/bin"
 
 USER code
 
-RUN USER=${USERNAME} nix run nixpkgs#home-manager -- switch --flake github:mcanueste/nix-devcontainer#base@devcontainer
+RUN USER=${USERNAME} nix run nixpkgs#home-manager -- switch -b backup --flake github:mcanueste/nix-devcontainer#base@devcontainer
 
 # psmisc \
 # procps \

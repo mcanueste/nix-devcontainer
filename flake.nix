@@ -12,13 +12,6 @@
     };
 
     nix-alien.url = "github:thiagokokada/nix-alien";
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = {
@@ -54,14 +47,6 @@
         extraSpecialArgs = args;
         modules = [
           ./home-manager/base.nix
-        ];
-      };
-
-      "code@devcontainer" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = args;
-        modules = [
-          ./home-manager/code.nix
         ];
       };
     };
