@@ -36,17 +36,17 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     # Custom packages
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    packages = forAllSystems (system: import ./nix/pkgs nixpkgs.legacyPackages.${system});
 
     # Custom overlays
-    overlays = import ./overlays {inherit inputs;};
+    overlays = import ./nix/overlays {inherit inputs;};
 
     homeConfigurations = {
       "base@devcontainer" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = args;
         modules = [
-          ./home-manager/base.nix
+          ./nix/home-manager/base.nix
         ];
       };
     };

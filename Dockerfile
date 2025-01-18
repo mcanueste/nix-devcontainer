@@ -8,12 +8,18 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN echo "dash dash/sh boolean false" | debconf-set-selections
 RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 
+# install core utils that don't change frequently here
+# nix installation is possible, but they make the base image massive
 RUN apt-get update -y \
     && apt-get -y install --no-install-recommends \
       sudo \
       ca-certificates \
       curl \
       locales \
+      git \
+      ssh \
+      gnupg2 \
+      direnv \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -21,7 +27,7 @@ RUN apt-get update -y \
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 
 # create non-root user and group and add it sudoers
-ARG USERNAME=code
+ARG USERNAME=devcontainer
 ARG USER_UID=1000
 ARG USER_GID=${USER_UID}
 RUN groupadd --gid ${USER_GID} ${USERNAME} && \
@@ -29,33 +35,9 @@ RUN groupadd --gid ${USER_GID} ${USERNAME} && \
     echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/devcontainer && \
     chmod 0440 /etc/sudoers.d/devcontainer
 
+ENV PATH="${PATH}:/nix/var/nix/profiles/default/bin"
 RUN curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
   sh -s -- install linux --extra-conf "sandbox = false" --init none --no-confirm && \
   chown -R ${USERNAME} /nix
 
-ENV PATH="${PATH}:/nix/var/nix/profiles/default/bin"
-
-USER code
-
-RUN USER=${USERNAME} nix run nixpkgs#home-manager -- switch -b backup \
-  --flake github:mcanueste/nix-devcontainer#base@devcontainer \
-  && nix-store --gc \ 
-  && nix-store --optimise 
-
-# psmisc \
-# procps \
-# less \
-# xz-utils \
-# nano \
-# git \
-# ssh \
-# direnv \
-# gnupg2 \
-# iproute2 \
-# inetutils-ping \
-# rsync \
-# lsb-release \
-# dialog \
-# man-db \
-# bash-completion \
-# acl \
+USER devcontainer
